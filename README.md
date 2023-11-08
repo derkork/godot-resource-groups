@@ -7,7 +7,9 @@ _This library is still quite new and has not seen much use yet. While it works r
 
 ## Introduction
 
-Godot Resource Groups is a library for managing resource groups in Godot. It allows you to define resource groups - a set of resources that belong together. You can then load these resources from your game code with a single line without having to hardcode the paths to the resources and doing any directory scanning. This is useful in a variety of situations:
+Godot Resource Groups is a library for dynamically loading resources in Godot. In Godot you can only load resources if you know their paths in advance. This means you will need to hard-code all resource paths. This is not only error-prone it also prevents bulk-loading of resources unless you hard-code each and every resource path. 
+
+With this library you can define resource groups - a set of resources that belong together. You can then load these resources from your game code with a single line without having to hardcode the paths to the resources and doing any directory scanning. This is useful in a variety of situations:
 
 - you want to load all resources in a folder (e.g. all levels in your game to make a level selection screen)
 - you want to pre-load resources to avoid stuttering when loading them for the first time 
