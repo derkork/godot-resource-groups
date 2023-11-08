@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d023rbsl3ak2u"
-path="res://.godot/imported/icon_monochrome_light.png-e5b382bafaa13642e3fd95e93e395b1d.ctex"
+path="res://.godot/imported/icon_monochrome_light.png-e7a088188c7d94a3233573796bfe61cf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://godot_resource_group_examples/images/icon_monochrome_light.png"
-dest_files=["res://.godot/imported/icon_monochrome_light.png-e5b382bafaa13642e3fd95e93e395b1d.ctex"]
+source_file="res://godot_resource_groups_examples/images/icon_monochrome_light.png"
+dest_files=["res://.godot/imported/icon_monochrome_light.png-e7a088188c7d94a3233573796bfe61cf.ctex"]
 
 [params]
 

@@ -19,7 +19,7 @@ namespace GodotResourceGroupsExamples
             _textureRect = GetNode<TextureRect>("%TextureRect");
 
             // load a resource group from a .tres file
-            var group = ResourceGroup.Of("res://godot_resource_group_examples/image_resource_group.tres");
+            var group = ResourceGroup.Of("res://godot_resource_groups_examples/image_resource_group.tres");
             
             // load all resources in the group
             _images = group.LoadAll();

@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://cd8pooqym5san"]
+[gd_scene load_steps=2 format=3 uid="uid://dqxlgwvjg4qop"]
 
-[ext_resource type="Script" path="res://godot_resource_group_examples/example_csharp/Example.cs" id="1_ioeoj"]
+[ext_resource type="Script" path="res://godot_resource_groups_examples/example_gdscript/example.gd" id="1_kyrwu"]
 
 [node name="ExampleScene" type="Control"]
 layout_mode = 3
@@ -9,7 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_ioeoj")
+script = ExtResource("1_kyrwu")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -38,4 +38,4 @@ size_flags_vertical = 3
 expand_mode = 3
 stretch_mode = 5
 
-[connection signal="item_selected" from="PanelContainer/VBoxContainer/OptionButton" to="." method="OnOptionButtonItemSelected"]
+[connection signal="item_selected" from="PanelContainer/VBoxContainer/OptionButton" to="." method="_on_option_button_item_selected"]

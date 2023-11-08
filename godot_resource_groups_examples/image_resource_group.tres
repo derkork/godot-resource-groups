@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ResourceGroup" load_steps=2 format=3 uid="uid://cdw670jdkat7u"]
+
+[ext_resource type="Script" path="res://addons/godot_resource_groups/resource_group.gd" id="1_vny68"]
+
+[resource]
+script = ExtResource("1_vny68")
+base_folder = "res://godot_resource_groups_examples/images"
+includes = Array[String](["*.png"])
+excludes = Array[String]([])
+paths = Array[String](["res://godot_resource_groups_examples/images/icon_color.png", "res://godot_resource_groups_examples/images/icon_color_outline.png", "res://godot_resource_groups_examples/images/icon_monochrome_dark.png", "res://godot_resource_groups_examples/images/icon_monochrome_light.png"])

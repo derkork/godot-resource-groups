@@ -6,5 +6,5 @@
 /addons    !export-ignore
 /addons/** !export-ignore
 # also include the examples folder
-/godot_resource_group_examples !export-ignore
-/godot_resource_group_examples/** !export-ignore
+/godot_resource_groups_examples !export-ignore
+/godot_resource_groups_examples/** !export-ignore
