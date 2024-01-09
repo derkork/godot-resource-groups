@@ -108,6 +108,26 @@ in C#:
 var resources = resourceGroup.LoadMatching(new []{"*.png"}, new []{"*monochrome*.png"});
 ```
 
+If you want to use type safe arrays, you can also use the type safe variants:
+	
+```gdscript
+# declare a type safe array
+var images:Array[Texture2D] = []
+# fills the array with the resources from the resource group
+resource_group.load_all_into(images)
+```
+
+in C#:
+
+```csharp
+// declare a typed list
+var images = new List<Texture2D>();
+// fills the list with the resources from the resource group
+resourceGroup.LoadAllInto(images);
+```
+
+There are also type safe variants for `load_matching` in GDScript and C# which work similarly.
+
 ## FAQ
 
 ### How do I select all but a few resources?
@@ -120,4 +140,4 @@ You can use the `Excludes` property to exclude resources from the resource group
 
 ### Will this work when the game is exported?
 
-Yes, this is one of the problems that this library solves. As resources are packaged into PCK files when the game is exported, you cannot easily get a list of all resources in a folder anymore after exporting, because the file system API does not work inside PCK files. This library solves this problem by storing the list of resources in the resource group itself, so all you need to do is load up your well-known resource group and you can get a list of all resources in it.
+Yes, this is one of the problems that this library solves. As resources are packaged into PCK files when the game is exported, you cannot easily get a list of all resources in a folder anymore after exporting, because Godot will rename/reorganize some files. This library solves this problem by storing the list of resources in the resource group itself, so all you need to do is load up your well-known resource group and you can get a list of all resources in it.

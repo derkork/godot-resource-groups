@@ -26,10 +26,16 @@ const PathVerifier = preload("path_verifier.gd")
 ## Loads all resources in this resource group and returns them.
 func load_all() -> Array[Resource]:
 	var result:Array[Resource] = []
-	for path in paths:
-		result.append(load(path))
-	
+	load_all_into(result)
 	return result
+	
+## Loads all resources and stores them into the given array. Allows
+## to load resources into typed arrays for better type safety. If 
+## the item is not of the required type, an error will be printed and 
+## the item is skipped.
+func load_all_into(destination:Array):
+	for path in paths:
+		destination.append(load(path))
 
 ## Gets all paths of resources inside of this resource group that
 ## match the given include and exclude criteria
@@ -41,11 +47,19 @@ func get_matching_paths(includes:Array[String], excludes:Array[String]) -> Array
 ## include and exclude criteria
 func load_matching(includes:Array[String], excludes:Array[String]) -> Array[Resource]:
 	var result:Array[Resource] = []
+	load_matching_into(result, includes, excludes)
+	return result
+	
+	
+## Loads all resources in this resource group that match the given
+## include and exclude criteria and stores them into the given array.
+## Allows to load resources into typed arrays for better type safety. If 
+## the item is not of the required type, an error will be printed and 
+## the item is skipped.
+func load_matching_into(destination:Array, includes:Array[String], excludes:Array[String]):
 	var matching_paths = get_matching_paths(includes, excludes)
 	for path in matching_paths:
-		result.append(load(path))
-		
-	return result
+		destination.append(load(path))
 
 
 # Workaround for C# interop not being able to properly convert arrays into Godot land.

@@ -3,15 +3,17 @@ extends Control
 @onready var option_button = %OptionButton
 @onready var texture_rect = %TextureRect
 
-var _images:Array[Resource]
+var _images:Array[Texture2D] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# load the resource group
 	var group:ResourceGroup = preload("../image_resource_group.tres") as ResourceGroup
 
+	print(_images.get_typed_script())
+
 	# get all images
-	_images = group.load_all()
+	group.load_all_into(_images)
 	
 	# add all images to the option button
 	for image in _images:
