@@ -62,29 +62,42 @@ func load_matching_into(destination:Array, includes:Array[String], excludes:Arra
 		destination.append(load(path))
 
 
+## Loads all resources in this resource group in background. Returns
+## a ResourceGroupBackgroundLoader object which can be used to check the
+## status and collect the results. Will call the on_resource_loaded callable for each
+## loaded resource.
+func load_all_in_background(on_resource_loaded:Callable) -> ResourceGroupBackgroundLoader:
+	return ResourceGroupBackgroundLoader.new(paths, on_resource_loaded)
+
+## Loads all resources in this resource group that match the given
+## include and exclude criteria in background. ResourceGroupBackgroundLoader object which can be used to check the
+## status and collect the results. Will call the on_resource_loaded callable for each
+## loaded resource.
+func load_matching_in_background(includes:Array[String], excludes:Array[String], on_resource_loaded:Callable) \
+		-> ResourceGroupBackgroundLoader:
+	return ResourceGroupBackgroundLoader.new(get_matching_paths(includes, excludes), on_resource_loaded)
+	
+#### CSHARP Specifics ####	
+	
 # Workaround for C# interop not being able to properly convert arrays into Godot land.
 func __csharp_get_matching_paths(includes:Array, excludes:Array) -> Array[String]:
-	var includes_converted:Array[String] = []
-	var	excludes_converted:Array[String] = []
-
-	for include in includes:
-		includes_converted.append(include)
-
-	for exclude in excludes:
-		excludes_converted.append(exclude)
-
-	return get_matching_paths(includes_converted, excludes_converted)
+	return get_matching_paths(__to_string_array(includes), __to_string_array(excludes))
 	
 	
 # Workaround for C# interop not being able to properly convert arrays into Godot land.
 func __csharp_load_matching(includes:Array, excludes:Array) -> Array[Resource]:
-	var includes_converted:Array[String] = []
-	var	excludes_converted:Array[String] = []
-	
-	for include in includes:
-		includes_converted.append(include)
+	return load_matching(__to_string_array(includes), __to_string_array(excludes))
+
+
+# Workaround for C# interop not being able to properly convert arrays into Godot land.
+func __csharp_load_matching_in_background(includes:Array, excludes:Array, on_resource_loaded:Callable) -> ResourceGroupBackgroundLoader:
+	return load_matching_in_background(__to_string_array(includes), __to_string_array(excludes), on_resource_loaded)
+
+
+# Converts an untyped array to a string array.
+func __to_string_array(array:Array) -> Array[String]:
+	var result:Array[String] = []
+	for item in array:
+		result.append(item)
 		
-	for exclude in excludes:
-		excludes_converted.append(exclude)
-		
-	return load_matching(includes_converted, excludes_converted)		
+	return result

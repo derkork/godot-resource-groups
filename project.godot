@@ -14,6 +14,11 @@ config/name="godot-resource-groups"
 config/features=PackedStringArray("4.0", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
 [dotnet]
 
 project/assembly_name="godot-resource-groups"

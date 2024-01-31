@@ -128,6 +128,57 @@ resourceGroup.LoadAllInto(images);
 
 There are also type safe variants for `load_matching` in GDScript and C# which work similarly.
 
+### Loading resources in the background
+
+Loading resources can take a while, especially if you have a lot of resources or if the resources are large. This can cause stuttering in your game. To avoid this, you can load resources in the background, starting with version 0.3.0 of this library. To load all resources in the background, use the `load_all_in_background` method:
+
+```gdscript
+var _loader:ResourceGroupBackgroundLoader = null
+
+func _ready():
+	_loader = resource_group.load_all_in_background(on_resource_loaded)
+
+func on_resource_loaded(info:ResourceGroupBackgroundLoader.ResourceLoadingInfo):
+	print("Resource loading succeeded: ", info.success) # will be false if loading failed, true otherwise
+	print("Resource loaded: ", info.resource) # will be null if loading failed
+	print("Resource path: ", info.path) # the path of the resource, will always be set, even if loading failed
+	print("Progress: ", info.progress) # the overall progress of the loading operation, between 0 and 1
+	print("Is last resource: ", info.last) # will be true if is the last resource that has been loaded
+
+func _on_cancel_button_pressed():
+	# loading can be cancelled at any time by calling cancel on the loader
+	_loader.cancel()
+```
+
+This works similarly in C#:
+
+```csharp
+private ResourceGroupBackgroundLoader _loader;
+
+public override void _Ready()
+{
+	_loader = resourceGroup.LoadAllInBackground(OnResourceLoaded);
+}
+
+private void OnResourceLoaded(ResourceGroupBackgroundLoader.ResourceLoadingInfo info)
+{
+	GD.Print("Resource loading succeeded: ", info.Success); // will be false if loading failed, true otherwise
+	GD.Print("Resource loaded: ", info.Resource); // will be null if loading failed
+	GD.Print("Resource path: ", info.Path); // the path of the resource, will always be set, even if loading failed
+	GD.Print("Progress: ", info.Progress); // the overall progress of the loading operation, between 0 and 1
+	GD.Print("Is last resource: ", info.Last); // will be true if is the last resource that has been loaded
+}
+
+public void _OnCancelButtonPressed()
+{
+	// loading can be cancelled at any time by calling cancel on the loader
+	_loader.Cancel();
+}
+```
+Also check out the loading examples for [GDScript](godot_resource_groups_examples/example_background_gdscript) and [C#](godot_resource_groups_examples/example_background_csharp) for more details.
+
+There is also a variant `load_matching_in_background` which works similarly, but only loads a subset of the resources.
+
 ## FAQ
 
 ### How do I select all but a few resources?
