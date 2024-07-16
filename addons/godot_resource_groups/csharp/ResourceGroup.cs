@@ -48,17 +48,17 @@ namespace GodotResourceGroups
         /// <summary>
         /// Returns all include patterns in this resource group.
         /// </summary>
-        public List<string> Includes => new(_wrapped.Call("get_includes").AsStringArray());
+        public List<string> Includes => new(_wrapped.Get("includes").AsStringArray());
 
         /// <summary>
         /// Returns all exclude patterns in this resource group.
         /// </summary>
-        public List<string> Excludes => new(_wrapped.Call("get_excludes").AsStringArray());
+        public List<string> Excludes => new(_wrapped.Get("excludes").AsStringArray());
 
         /// <summary>
         /// Returns all paths in this resource group.
         /// </summary>
-        public List<string> Paths => new(_wrapped.Call("get_paths").AsStringArray());
+        public List<string> Paths => new(_wrapped.Get("paths").AsStringArray());
 
         /// <summary>
         /// Loads all resources in this resource group.
