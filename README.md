@@ -66,7 +66,11 @@ Both _Includes_ and _Excludes_ are lists of path expressions. A path expression 
 
 For example, the path expression `**.png` will match all PNG files in the base folder and all subfolders. The path expression `foo/*.png` will match all PNG files in the `foo` folder. The path expression `foo/**.png` will match all PNG files in the `foo` folder and all subfolders of the `foo` folder. The expression `image?.png` will match `image1.png` and `image2.png` but not `image.png` or `image12.png`.
 
-Whenever the project is saved, resource groups will be automatically updated. This means that if you add or remove resources in the base folder, the resource group will automatically be updated to include or exclude these resources based on the path expressions that you have given.
+Whenever the project is launched, resource groups will be automatically updated. This means that if you add or remove resources in the base folder, the resource group will automatically be updated to include or exclude these resources based on the path expressions that you have given. If your project contains a lot of resource groups and updating them all takes too long, starting with version 0.4.0 you can disable the automatic rebuild of resource groups in the project settings. To do this go to the project settings, **enable advanced settings**, and then uncheck the _Auto Rebuild_ option.
+
+![Disabling the automatic rebuild of resource groups](manual/images/disable_automatic_rebuild.png)
+
+You can manually rebuild all resource groups using the main menu entry _Project -> Tools -> Rebuild project resource groups_.
 
 ### Loading resources from a resource group
 

@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2024-07-19
+### Added
+- It is now possible to disable the automatic rebuild of the resource groups in a project. This can be beneficial in very large projects where updating all resource group can take a bit of time. To disable the automatic rebuild, go to project settings, **enable advanced settings**, and the uncheck the _Auto Rebuild_ option. You can manually rebuild all resource groups using the main menu entry _Project -> Tools -> Rebuild project resource groups_ ([#7](https://github.com/derkork/godot-resource-groups/issues/7)).
+
+### Improved
+- The plugin will now rebuild resource groups when the project is launched or exported, rather than when the project is saved. This will prevent unnecessary rebuilds when saving the project multiple times in a row ([#4](https://github.com/derkork/godot-resource-groups/issues/4)).
+- The plugin will now warn you, if a resource group includes files that are not actually supported Godot resources (e.g. `.txt` files). Such files were ignored before but are now explicitly mentioned when building a resource group ([#8](https://github.com/derkork/godot-resource-groups/issues/8)).
+
 ## [0.3.0] - 2024-01-31
 ### Added
 - It is now possible to load resources in background using the new `load_all_in_background` and `load_matching_in_background` functions (and their C# equivalents). These functions will accept a callback that will be called for each loaded resource and provides information about the result of the load operation and the overall progress. The callback will be called on the main thread. ([#2](https://github.com/derkork/godot-resource-groups/issues/2)).

@@ -126,11 +126,15 @@ func matches(file:String) -> bool:
 				break
 			
 		if not found:
+			if file.contains(".txt"):
+				print("file ", file , " did not match any regex")
 			return false
 
 	# the file must not match any exclude pattern
 	for item in _exclude_regexes:
 		if item.search(file) != null:
+			if file.contains(".txt"):
+				print("file ", file , " was excluded ")
 			return false
 
 	return true

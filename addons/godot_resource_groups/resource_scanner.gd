@@ -21,7 +21,7 @@ func scan() -> Array[String]:
 	var result:Array[String] = []
 	var folder = _group.base_folder
 	
-	if folder == "":		
+	if folder == "":
 		push_warning("In resource group '" + _group.resource_path + "': Base folder is not set. Resource group will be empty.")
 		return result
 	
@@ -43,6 +43,8 @@ func _scan(folder:String, results:Array[String]):
 		if _matches_group_definition(full_name):
 			if ResourceLoader.exists(full_name):
 				results.append(full_name)
+			else:
+				push_warning("In resource group '" + _group.resource_path + "': File '" + full_name + "' exists, but is not a supported Godot resource. It will be ignored.")
 
 	# recurse into subfolders
 	var subfolders = DirAccess.get_directories_at(folder)

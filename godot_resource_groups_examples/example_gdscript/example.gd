@@ -10,8 +10,6 @@ func _ready():
 	# load the resource group
 	var group:ResourceGroup = preload("../image_resource_group.tres") as ResourceGroup
 
-	print(_images.get_typed_script())
-
 	# get all images
 	group.load_all_into(_images)
 	
