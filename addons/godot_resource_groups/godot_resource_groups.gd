@@ -27,13 +27,13 @@ func _enter_tree():
 	})
 	
 	# register the export plugin
-	#_export_plugin = ResourceGroupsExportPlugin.new()
-	#add_export_plugin(_export_plugin)
+	_export_plugin = ResourceGroupsExportPlugin.new(_rebuild_resource_groups)
+	add_export_plugin(_export_plugin)
 
 
 func _exit_tree():
 	remove_tool_menu_item("Rebuild project resource groups")
-	#remove_export_plugin(_export_plugin)
+	remove_export_plugin(_export_plugin)
 
 
 func _build() -> bool:
