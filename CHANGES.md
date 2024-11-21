@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
 ## [0.4.0] - 2024-07-19
 ### Added
 - It is now possible to disable the automatic rebuild of the resource groups in a project. This can be beneficial in very large projects where updating all resource group can take a bit of time. To disable the automatic rebuild, go to project settings, **enable advanced settings**, and the uncheck the _Auto Rebuild_ option. You can manually rebuild all resource groups using the main menu entry _Project -> Tools -> Rebuild project resource groups_ ([#7](https://github.com/derkork/godot-resource-groups/issues/7)).

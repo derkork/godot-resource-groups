@@ -8,12 +8,13 @@ const PathVerifier = preload("path_verifier.gd")
 
 var _group:ResourceGroup
 var _verifier:PathVerifier
+var _file_system:EditorFileSystem
 
 ## Ctor.
-func _init(group:ResourceGroup):
+func _init(group:ResourceGroup, file_system:EditorFileSystem):
 	_group = group	
 	_verifier = PathVerifier.new(_group.base_folder, _group.includes, _group.excludes)
-
+	_file_system = file_system
 	
 ## Scans the whole project for resources that match the
 ## group definition.
@@ -25,21 +26,21 @@ func scan() -> Array[String]:
 		push_warning("In resource group '" + _group.resource_path + "': Base folder is not set. Resource group will be empty.")
 		return result
 	
-	if not DirAccess.dir_exists_absolute(folder):
+	var root = _file_system.get_filesystem_path(folder)
+	
+	if root == null:
 		push_warning("In resource group '" + _group.resource_path + "': Base folder '" + folder + "' does not exist. Resource group will be empty.")
 		return result
 
-	_scan(_group.base_folder, result)
+	_scan(root, result)
 	return result
 
 
-func _scan(folder:String, results:Array[String]):
+func _scan(folder:EditorFileSystemDirectory, results:Array[String]):
 	# get all files in the folder
-	var files = DirAccess.get_files_at(folder)
-
 	# for each file first check if it matches the group definition, before trying to load it
-	for file in files:
-		var full_name = folder + "/" + file
+	for i in folder.get_file_count():
+		var full_name = folder.get_file_path(i)
 		if _matches_group_definition(full_name):
 			if ResourceLoader.exists(full_name):
 				results.append(full_name)
@@ -47,9 +48,8 @@ func _scan(folder:String, results:Array[String]):
 				push_warning("In resource group '" + _group.resource_path + "': File '" + full_name + "' exists, but is not a supported Godot resource. It will be ignored.")
 
 	# recurse into subfolders
-	var subfolders = DirAccess.get_directories_at(folder)
-	for subfolder in subfolders:
-		_scan(folder + "/" + subfolder, results)
+	for j in folder.get_subdir_count():
+		_scan(folder.get_subdir(j), results)
 
 
 func _matches_group_definition(file:String) -> bool:
