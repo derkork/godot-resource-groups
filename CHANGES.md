@@ -6,7 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.4.1] - 2024-11-21
 ### Improved
-- Increased scanning speed by a factor of 15 by using a different API for traversing the file system. This avoids building a lot of strings for path names and reduces scan time from 2.3 seconds to 0.13 seconds for a project with 100k files in it.
+- Increased scanning speed by a factor of 15 by using a different API for traversing the file system. This avoids building a lot of strings for path names and reduces scan time from 2.3 seconds to 0.13 seconds for a project with 100k files in it ([#15](https://github.com/derkork/godot-resource-groups/issues/15)).
+### Fixed
+- The export process now no longer breaks Dialogic's export ([#14](https://github.com/derkork/godot-resource-groups/issues/14)).
 
 ## [0.4.0] - 2024-07-19
 ### Added

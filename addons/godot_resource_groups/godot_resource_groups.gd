@@ -45,7 +45,6 @@ func _build() -> bool:
 
 
 func _rebuild_resource_groups():
-	print("start")
 	var start = Time.get_unix_time_from_system()
 	var groups = _group_scanner.scan()
 
