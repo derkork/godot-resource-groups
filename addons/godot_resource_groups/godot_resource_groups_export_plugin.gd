@@ -1,6 +1,6 @@
-﻿extends EditorExportPlugin
+extends EditorExportPlugin
 
-const ResourceScanner = preload("resource_scanner.gd")
+#const ResourceScanner = preload("resource_scanner.gd")
 
 
 func _begin_customize_resources(platform: EditorExportPlatform, features: PackedStringArray) -> bool:
@@ -12,13 +12,13 @@ func _get_name() -> String:
 func _customize_resource(resource: Resource, path: String) -> Resource:
 	print("Customizing resource: ", path)
 	# re-scan resource paths for ResourceGroup on export
-	if resource is ResourceGroup:
-		print("Updating resource group before export: ", path)
-		var group:ResourceGroup = resource as ResourceGroup
-		var resource_scanner = ResourceScanner.new(group)
-		var resource_paths   = resource_scanner.scan()
-		group.paths = resource_paths
-		return group
+#	if resource is ResourceGroup:
+#		print("Updating resource group before export: ", path)
+#		var group:ResourceGroup = resource as ResourceGroup
+#		var resource_scanner = ResourceScanner.new(group)
+#		var resource_paths   = resource_scanner.scan()
+#		group.paths = resource_paths
+#		return group
 
 	# everything else we don't care about
 	return null

@@ -1,5 +1,9 @@
 @tool
 
+var _file_system:EditorFileSystem
+
+func _init(file_system:EditorFileSystem) -> void:
+	_file_system = file_system
 
 ## The resource group scanner finds all resource groups currently 
 ## in the project.
@@ -8,28 +12,22 @@
 ## group definition.
 func scan() -> Array[Resource]:
 	var result:Array[Resource] = []
-	var folder = "res://"
-
-	_scan(folder, result)
+	_scan(_file_system.get_filesystem(), result)
 	return result
 
 
-func _scan(folder:String, results:Array[Resource]):
+func _scan(folder:EditorFileSystemDirectory, results:Array[Resource]):
 	# get all files in the folder
-	var files = DirAccess.get_files_at(folder)
+	for i in folder.get_file_count():
+		if folder.get_file_type(i) == "Resource":
+			var path = folder.get_file_path(i)
+			if path.ends_with(".tres"):
+				var resource = ResourceLoader.load(path)
+				if resource is ResourceGroup:
+					results.append(resource)
 
 	# for each file first check if it matches the group definition, before trying to load it
-	for file in files:
-		var full_name = folder + "/" + file
-		# avoid loading each and every resource in the project
-		if full_name.ends_with(".tres") and ResourceLoader.exists(full_name):
-			var resource = ResourceLoader.load(full_name)
-			if resource is ResourceGroup:
-				results.append(resource)
-
-	# recurse into subfolders
-	var subfolders = DirAccess.get_directories_at(folder)
-	for subfolder in subfolders:
-		_scan(folder + "/" + subfolder, results)
+	for j in folder.get_subdir_count():
+		_scan(folder.get_subdir(j), results)
 
 
