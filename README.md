@@ -154,6 +154,8 @@ func _on_cancel_button_pressed():
 	_loader.cancel()
 ```
 
+**Important:**: you need to retain a reference to the background loader during the loading process. Otherwise Godot will free the resource loader and your loading will never finish. In general you will want to do this anyway, to allow the user to cancel the loading process.
+
 This works similarly in C#:
 
 ```csharp
