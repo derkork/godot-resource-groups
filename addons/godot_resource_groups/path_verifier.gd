@@ -36,7 +36,13 @@ func _compile_pattern(base_folder:String, pattern:String) -> RegEx:
 	# the pattern is anchored at the beginning and end of the string
 	# the pattern is case-sensitive
 
-	var regex = "^" + _escape_string(base_folder) + "/"
+	var regex = "^" + _escape_string(base_folder)
+	
+	# fix for #21, only append trailing slash if the incoming path
+	# doesn't already have one
+	if not base_folder.ends_with("/"):
+		regex += "/"
+		
 	var i = 0
 	var len = pattern.length()
 

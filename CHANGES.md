@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.2] - 2025-02-25
+### Fixed
+- Resources are now also properly found when the base path ends with a trailing slash ([#21](https://github.com/derkork/godot-resource-groups/issues/21)).
+
+
 ## [0.4.1] - 2024-11-21
 ### Improved
 - Increased scanning speed by a factor of 15 by using a different API for traversing the file system. This avoids building a lot of strings for path names and reduces scan time from 2.3 seconds to 0.13 seconds for a project with 100k files in it ([#15](https://github.com/derkork/godot-resource-groups/issues/15)).
