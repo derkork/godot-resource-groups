@@ -198,3 +198,8 @@ You can use the `Excludes` property to exclude resources from the resource group
 ### Will this work when the game is exported?
 
 Yes, this is one of the problems that this library solves. As resources are packaged into PCK files when the game is exported, you cannot easily get a list of all resources in a folder anymore after exporting, because Godot will rename/reorganize some files. This library solves this problem by storing the list of resources in the resource group itself, so all you need to do is load up your well-known resource group and you can get a list of all resources in it.
+
+
+### I pressed save but the resources don't update, is this broken?
+
+This has been changed in version 0.4.0 after the video showing how to use it was released. The paths will only be updated when the project is built (e.g. on game start) or exported. This was done to prevent slowdowns in large projects with a lot of resources as it is not necessary to do this every time you save the project. 
