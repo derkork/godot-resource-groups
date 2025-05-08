@@ -200,7 +200,7 @@ if resource_group_plugin != null:
 
 **Important:**: Implemented only for GDScript
 
-**Important:**: It would not and **should not** work in exported game. `ResourceGroupsPlugin.instance` will return `null`
+**Important:**: It will not and **should not** work in exported game. `ResourceGroupsPlugin.instance` will return `null`
 
 ## FAQ
 
