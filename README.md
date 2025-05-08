@@ -185,6 +185,23 @@ Also check out the loading examples for [GDScript](godot_resource_groups_example
 
 There is also a variant `load_matching_in_background` which works similarly, but only loads a subset of the resources.
 
+## Using in plugins
+
+### Rebuilding resources on request from another plugin
+
+If you create resources using a custom plugin, you can trigger group rebuilding from that plugin using a signal:
+
+```gdscript
+var resource_group_plugin = ResourceGroupsPlugin.instance
+
+if resource_group_plugin != null:
+	resource_group_plugin.rebuild_resources.emit()
+```
+
+**Important:**: Implemented only for GDScript
+
+**Important:**: It would not and **should not** work in exported game. `ResourceGroupsPlugin.instance` will return `null`
+
 ## FAQ
 
 ### How do I select all but a few resources?
