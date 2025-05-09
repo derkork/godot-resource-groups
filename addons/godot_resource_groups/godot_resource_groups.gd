@@ -10,9 +10,6 @@ var _group_scanner: ResourceGroupScanner
 var _export_plugin: ResourceGroupsExportPlugin
 
 func _enter_tree():
-	if not Engine.is_editor_hint():
-		return
-	
 	# make the plugin singleton available to the rest of the engine
 	Engine.register_singleton("ResourceGroupsPlugin", self)
 	
@@ -37,9 +34,6 @@ func _enter_tree():
 
 
 func _exit_tree():
-	if not Engine.is_editor_hint():
-		return
-
 	Engine.unregister_singleton("ResourceGroupsPlugin")
 	remove_tool_menu_item("Rebuild project resource groups")
 	remove_export_plugin(_export_plugin)
