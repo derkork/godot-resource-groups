@@ -189,18 +189,19 @@ There is also a variant `load_matching_in_background` which works similarly, but
 
 ### Rebuilding resources on request from another plugin
 
-If you create resources using a custom plugin, you can trigger group rebuilding from that plugin using a signal:
+If you create resources using editor scripting, you can trigger a rebuild of all resource groups from your plugin:
 
 ```gdscript
-var resource_group_plugin = ResourceGroupsPlugin.instance
-
-if resource_group_plugin != null:
-	resource_group_plugin.rebuild_resources.emit()
+ResourceGroupsPlugin.rebuild_resource_groups()
 ```
 
-**Important:**: Implemented only for GDScript
+Similarly from C#:
 
-**Important:**: It will not and **should not** work in exported game. `ResourceGroupsPlugin.instance` will return `null`
+```csharp
+ResourceGroupsPlugin.RebuildResourceGroups();
+```
+
+Please note, that this will only work in the editor. If you call this function at runtime it will print an error message and do nothing.
 
 ## FAQ
 
