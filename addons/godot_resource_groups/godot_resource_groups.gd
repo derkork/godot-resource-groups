@@ -1,6 +1,5 @@
 @tool
 extends EditorPlugin
-class_name ResourceGroupsPlugin
 
 const ResourceScanner = preload("resource_scanner.gd")
 const ResourceGroupScanner = preload("resource_group_scanner.gd")
@@ -10,14 +9,13 @@ const REBUILD_SETTING: StringName = "godot_resource_groups/auto_rebuild"
 var _group_scanner: ResourceGroupScanner
 var _export_plugin: ResourceGroupsExportPlugin
 
-static var instance : EditorPlugin
-
-signal rebuild_resources
-
 func _enter_tree():
-	instance = self
-	_connect_signals()
-
+	if not Engine.is_editor_hint():
+		return
+	
+	# make the plugin singleton available to the rest of the engine
+	Engine.register_singleton("ResourceGroupsPlugin", self)
+	
 	add_tool_menu_item("Rebuild project resource groups", _rebuild_resource_groups)
 	_group_scanner = ResourceGroupScanner.new(get_editor_interface().get_resource_filesystem())
 	
@@ -39,19 +37,12 @@ func _enter_tree():
 
 
 func _exit_tree():
-	_disconnect_signals()
+	if not Engine.is_editor_hint():
+		return
+
+	Engine.unregister_singleton("ResourceGroupsPlugin")
 	remove_tool_menu_item("Rebuild project resource groups")
 	remove_export_plugin(_export_plugin)
-	instance = null
-
-
-func _connect_signals():
-	rebuild_resources.connect(_rebuild_resource_groups)
-
-
-func _disconnect_signals():
-	if rebuild_resources.is_connected(_rebuild_resource_groups):
-		rebuild_resources.disconnect(_rebuild_resource_groups)
 
 
 func _build() -> bool:
